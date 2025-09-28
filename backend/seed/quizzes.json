@@ -1,0 +1,75 @@
+[
+  {
+    "title": "JavaScript Basics Quiz",
+    "description": "A quiz to test your basic knowledge of JavaScript.",
+    "isAttempted": true,
+    "quizLevel": "easy",
+    "questions": [
+      {
+        "statement": "Which keyword is used to declare a variable in JavaScript?",
+        "options": ["var", "let", "const", "All of the above"],
+        "status": "correct"
+      },
+      {
+        "statement": "Which of the following is NOT a JavaScript data type?",
+        "options": ["Number", "String", "Boolean", "Character"],
+        "status": "incorrect"
+      },
+      {
+        "statement": "What is the result of `typeof null` in JavaScript?",
+        "options": ["object", "null", "undefined", "boolean"],
+        "status": "unattempted"
+      }
+    ],
+    "duration": "15",
+    "createdAt": "2025-09-15T10:30:00Z",
+    "updatedAt": "2025-09-15T10:30:00Z"
+  },
+  {
+    "title": "Data Structures Quiz",
+    "description": "Covers fundamental concepts of data structures.",
+    "isAttempted": false,
+    "quizLevel": "medium",
+    "questions": [
+      {
+        "statement": "Which data structure uses FIFO principle?",
+        "options": ["Stack", "Queue", "Linked List", "Tree"],
+        "status": "unattempted"
+      },
+      {
+        "statement": "Which sorting algorithm has O(n log n) complexity in average case?",
+        "options": ["Quick Sort", "Bubble Sort", "Insertion Sort", "Selection Sort"],
+        "status": "unattempted"
+      }
+    ],
+    "duration": "30",
+    "createdAt": "2025-09-15T11:00:00Z",
+    "updatedAt": "2025-09-15T11:00:00Z"
+  },
+  {
+    "title": "System Design Advanced Quiz",
+    "description": "A hard-level quiz testing your understanding of scalable system design.",
+    "isAttempted": true,
+    "quizLevel": "hard",
+    "questions": [
+      {
+        "statement": "Which database is best suited for handling graph-based queries?",
+        "options": ["MySQL", "PostgreSQL", "Neo4j", "MongoDB"],
+        "status": "correct"
+      },
+      {
+        "statement": "What is the purpose of a load balancer?",
+        "options": ["Store logs", "Distribute traffic", "Compress data", "Encrypt data"],
+        "status": "correct"
+      },
+      {
+        "statement": "In CAP theorem, what does 'P' stand for?",
+        "options": ["Performance", "Partition Tolerance", "Persistence", "Processing"],
+        "status": "incorrect"
+      }
+    ],
+    "duration": "45",
+    "createdAt": "2025-09-15T12:00:00Z",
+    "updatedAt": "2025-09-15T12:00:00Z"
+  }
+]

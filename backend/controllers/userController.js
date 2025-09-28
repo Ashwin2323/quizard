@@ -29,8 +29,9 @@ export async function signup(req,res){
         return res.json({
             message: `Account Created, ${alreadyExist.name}!`
         });
-    }catch(e){
-        res.send(e);
+    }catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Failed to Register" });
     }
 }
 
@@ -63,8 +64,9 @@ export async function login(req,res){
             message: `Welcome back, ${alreadyExist.name}!`,
             token
         });
-    }catch(e){
-        res.send(e);
+    }catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Failed to Login" });
     }
 }
 
@@ -86,8 +88,9 @@ export async function logout(req,res){
         return res.cookie('token',"").json({
             message: `Logged out successfully`,
         });
-    }catch(e){
-        res.send(e);
+    }catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Failed to Logout" });
     }
 }
 

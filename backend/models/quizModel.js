@@ -16,7 +16,6 @@ const quizSchema = new mongoose.Schema({
     },
     description:{
         type:String,
-        required: true
     },
     isAttempted:{
         type: Boolean,
@@ -37,6 +36,11 @@ const quizSchema = new mongoose.Schema({
             enum: ["correct", "incorrect", "unattempted"]
         }
     }],
+    createdBy:{
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
     duration: {
         type: String,
         enum: ["15", "30", "45", "60"]
