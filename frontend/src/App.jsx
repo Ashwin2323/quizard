@@ -5,14 +5,16 @@ import Login from "./pages/Login";
 
 export default function App() {
   return (
-    <div className="">
+    <div className="flex flex-col">
       <BrowserRouter>
       <Navbar/>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/signup" element={<Login/>}/>
-          <Route path="/Login" element={<Login/>}/>
-        </Routes>
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/signup" element={<Login/>}/>
+            <Route path="/login" element={<Login/>}/>
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );
