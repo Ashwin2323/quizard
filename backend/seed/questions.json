@@ -1,0 +1,62 @@
+[
+  {
+    "_id": { "$oid": "652caaaa1111111111111111" },
+    "statement": "What is JS?",
+    "options": ["Language", "Library", "Framework", "Tool"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaa2222222222222222" },
+    "statement": "What is HTML?",
+    "options": ["Markup", "CSS", "JS", "SQL"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaa3333333333333333" },
+    "statement": "What is CSS?",
+    "options": ["Language", "Style", "Framework", "Tool"],
+    "answer": "B"
+  },
+  {
+    "_id": { "$oid": "652caaaa4444444444444444" },
+    "statement": "Which is a JS framework?",
+    "options": ["React", "HTML", "CSS", "MongoDB"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaa5555555555555555" },
+    "statement": "Which is a DB?",
+    "options": ["MongoDB", "React", "HTML", "CSS"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaa6666666666666666" },
+    "statement": "FIFO structure?",
+    "options": ["Stack", "Queue", "Tree", "Graph"],
+    "answer": "B"
+  },
+  {
+    "_id": { "$oid": "652caaaa7777777777777777" },
+    "statement": "LIFO structure?",
+    "options": ["Stack", "Queue", "Tree", "Graph"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaa8888888888888888" },
+    "statement": "JS function keyword?",
+    "options": ["def", "function", "func", "fn"],
+    "answer": "B"
+  },
+  {
+    "_id": { "$oid": "652caaaa9999999999999999" },
+    "statement": "Which sorting is O(n log n)?",
+    "options": ["Quick", "Bubble", "Insertion", "Selection"],
+    "answer": "A"
+  },
+  {
+    "_id": { "$oid": "652caaaabbbbbbbbbbbbbbbb" },
+    "statement": "CAP theorem P stands for?",
+    "options": ["Performance", "Partition", "Persistence", "Processing"],
+    "answer": "B"
+  }
+]

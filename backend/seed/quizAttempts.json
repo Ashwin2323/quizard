@@ -1,0 +1,48 @@
+[
+  {
+    "_id": { "$oid": "652ccccc1111111111111111" },
+    "user": { "$oid": "652c11111111111111111111" },
+    "quiz": { "$oid": "652cbbbb1111111111111111" },
+    "answers": [
+      {
+        "questionId": { "$oid": "652caaaa1111111111111111" },
+        "chosenOption": "A",
+        "status": "correct"
+      },
+      {
+        "questionId": { "$oid": "652caaaa4444444444444444" },
+        "chosenOption": "A",
+        "status": "correct"
+      },
+      {
+        "questionId": { "$oid": "652caaaa8888888888888888" },
+        "chosenOption": "B",
+        "status": "incorrect"
+      }
+    ],
+    "score": 2
+  },
+  {
+    "_id": { "$oid": "652ccccc2222222222222222" },
+    "user": { "$oid": "652c22222222222222222222" },
+    "quiz": { "$oid": "652cbbbb2222222222222222" },
+    "answers": [
+      {
+        "questionId": { "$oid": "652caaaa6666666666666666" },
+        "chosenOption": "B",
+        "status": "correct"
+      },
+      {
+        "questionId": { "$oid": "652caaaa7777777777777777" },
+        "chosenOption": "A",
+        "status": "correct"
+      },
+      {
+        "questionId": { "$oid": "652caaaa9999999999999999" },
+        "chosenOption": "C",
+        "status": "incorrect"
+      }
+    ],
+    "score": 2
+  }
+]

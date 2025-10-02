@@ -1,10 +1,12 @@
 [
   {
+    "_id": { "$oid": "652c11111111111111111111" },
     "name": "User1",
     "email": "user1@gmail.com",
     "password": "123456"
   },
   {
+    "_id": { "$oid": "652c22222222222222222222" },
     "name": "User2",
     "email": "user2@gmail.com",
     "password": "123456"
