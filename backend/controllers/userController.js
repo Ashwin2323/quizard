@@ -50,7 +50,8 @@ export async function login(req,res){
             return res.send("Invalid Credentials");
         }
         
-        const match = await bcrypt.compare(user.password, alreadyExist.password);
+        // const match = await bcrypt.compare(user.password, alreadyExist.password);
+        const match=(user.password===alreadyExist.password);
         
         if(!match){
             return res.send("Invalid Credentials");
