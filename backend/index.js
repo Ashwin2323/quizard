@@ -4,11 +4,12 @@ import connectDB from "./database/db.js";
 import  userRouter from "./routes/userRoute.js"
 import  quizRouter from "./routes/quizRoute.js"
 import cookieParser from "cookie-parser";
-
+import cors from "cors";
 
 const app=express();
 dotenv.config();
 connectDB();
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser())
 

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import QuizPage from "./pages/QuizPage";
 import QuestionPage from "./pages/QuestionPage";
+import { Toaster } from "@/components/ui/toaster"
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <Toaster/>
     </div>
   );
 }

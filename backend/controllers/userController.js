@@ -6,18 +6,21 @@ export async function signup(req,res){
     try{
         const user=req.body;
         if(!user){
-            return res.send("Invalid Input");
+            return res.status(400).json({ message: "Invalid Input", success: false  });
         }
         if(!user.email || !user.password || !user.name){
-            return res.send("Invalid Input");
+            return res.status(400).json({ message: "Invalid Input", success: false });
         }
         
         const alreadyExist = await User.findOne({email: user.email});
         if(alreadyExist){
-            return res.send("User Already Exists");
+            return res.status(401).json({ message: "Invalid Credentials/ User already exist", success: false });
         }
     
-        const hashedPassword = await bcrypt.hash(user.password, 10);
+        // Temporarily commented for testing purposes
+        // const hashedPassword = await bcrypt.hash(user.password, 10);
+        const hashedPassword=user.password;
+
     
         const newUser=await User.create({
             name: user.name,
@@ -27,11 +30,12 @@ export async function signup(req,res){
     
         // console.log("Hii from register");
         return res.json({
-            message: `Account Created, ${alreadyExist.name}!`
+            message: `Welcome , ${user.name}!`,
+            success: true
         });
     }catch (error) {
       console.log(error);
-      return res.status(500).json({ message: "Failed to Register" });
+      return res.status(500).json({ message: "Failed to Register", success: false });
     }
 }
 
@@ -39,22 +43,23 @@ export async function login(req,res){
     try{
         const user=req.body;
         if(!user){
-            return res.send("Invalid Input");
+            return res.status(400).json({ message: "Invalid Input", success: false });
         }
         if(!user.email || !user.password){
-            return res.send("Invalid Input");
+            return res.status(400).json({ message: "Invalid Input", success: false });
         }
         
         const alreadyExist = await User.findOne({email: user.email});
         if(!alreadyExist){
-            return res.send("Invalid Credentials");
+            return res.status(401).json({ message: "Invalid Credentials", success: false });
         }
         
+        // Temporarily commented for testing purposes
         // const match = await bcrypt.compare(user.password, alreadyExist.password);
         const match=(user.password===alreadyExist.password);
         
         if(!match){
-            return res.send("Invalid Credentials");
+            return res.status(401).json({ message: "Invalid Credentials", success: false });
         }
         
         const token = jwt.sign({
@@ -63,11 +68,12 @@ export async function login(req,res){
     
         return res.cookie('token',token).json({
             message: `Welcome back, ${alreadyExist.name}!`,
-            token
+            token,
+            success: true
         });
     }catch (error) {
       console.log(error);
-      return res.status(500).json({ message: "Failed to Login" });
+      return res.status(500).json({ message: "Failed to Login", success: false });
     }
 }
 
