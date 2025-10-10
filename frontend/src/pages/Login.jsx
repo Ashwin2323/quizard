@@ -53,7 +53,7 @@ export default function Login() {
         const response = await axios.post(
           'http://localhost:8080/api/v1/user/login',
           loginInput,
-          { headers: { 'Content-Type': 'application/json' } }
+          { headers: { 'Content-Type': 'application/json' }, withCredentials: true,}
         );
         toast({
             title: response.data.message || "Login Successful",

@@ -66,10 +66,14 @@ export async function login(req,res){
           data: alreadyExist.email
         }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 60 });
     
-        return res.cookie('token',token).json({
-            message: `Welcome back, ${alreadyExist.name}!`,
-            token,
-            success: true
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production" ? true : false,
+          sameSite: "None",
+        });
+        return res.json({
+          message: `Welcome back, ${alreadyExist.name}!`,
+          success: true,
         });
     }catch (error) {
       console.log(error);
