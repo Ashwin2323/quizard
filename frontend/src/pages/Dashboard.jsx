@@ -2,6 +2,20 @@ import {Card} from '@/components/ui/Card'
 import { Button } from '../components/ui/button'
 import { Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import CreateQuiz from './CreateQuiz'
+
 
 export default function Dashboard() {
   const navigate=useNavigate();
@@ -16,7 +30,30 @@ export default function Dashboard() {
             <h3 className='text-xl'>Welcome back, User!</h3>
           </div>
           <div>
-            <Button onClick={()=>{navigate('/user/create')}} className='bg-green-500 text-base'><Plus size={23} />Create New Quiz</Button>
+            {/* <Button onClick={()=>{navigate('/user/create')}} className='bg-green-500 text-base'><Plus size={23} />Create New Quiz</Button> */}
+            <Dialog>
+      <form>
+        <DialogTrigger asChild>
+          <Button className='bg-green-500 text-base'><Plus size={23} />Create New Quiz</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </DialogDescription>
+          </DialogHeader>
+            <CreateQuiz/>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </form>
+    </Dialog>
           </div>
       </div>
         <div className='flex justify-between gap-8'>
