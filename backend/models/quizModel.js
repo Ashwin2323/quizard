@@ -30,7 +30,7 @@ const quizSchema = new mongoose.Schema({
     },
     quizLevel:{
         type: String,
-        enum:["easy", "medium", "hard"]
+        enum:["Easy", "Medium", "Hard"]
     },
     questions:[{type: mongoose.Types.ObjectId, ref: "Question"}],
     createdBy:{

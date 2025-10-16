@@ -18,7 +18,7 @@ const Navbar = () => {
         <h1 className="text-2xl"> About </h1>
       </div>
       <div className="flex gap-3">
-        <Button className="h-full bg-slate-200 text-black" 
+        <Button className="h-full bg-slate-200 text-gray-600" 
         onClick={()=>{navigate("/login")}} >Sign In</Button>
         <Button className="h-full bg-violet-800"
         onClick={()=>{navigate("/signup")}} >Register</Button>

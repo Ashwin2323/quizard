@@ -61,6 +61,7 @@ export default function App() {
     <div className="">
       <Toaster/>
       <RouterProvider router={router}/>
+      {/* <CreateQuiz></CreateQuiz> */}
     </div>
   );
 }
