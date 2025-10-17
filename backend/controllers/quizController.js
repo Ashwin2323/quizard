@@ -50,7 +50,8 @@ export async function getQuizDetails(req,res){
 
 export async function getQuizzes(req,res){
     try{
-        const userId=req.params;
+        console.log("these are params ",req.params);
+        const userId=req.params.userId;
         
         const user = await User.findById(userId)
         .select("-password")

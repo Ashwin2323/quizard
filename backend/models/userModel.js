@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     attemptedQuizzes:[{
         type: mongoose.Types.ObjectId,
-        ref: "Quiz"
+        ref: "QuizAttempt"
     }]
 }, {timestamps: true}) 
 

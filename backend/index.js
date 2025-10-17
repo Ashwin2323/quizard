@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import connectDB from "./database/db.js";
 import  userRouter from "./routes/userRoute.js"
 import  quizRouter from "./routes/quizRoute.js"
+import  attemptedQuizzesRouter from "./routes/attemptedQuizzesRoute.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -22,6 +23,7 @@ const PORT = process.env.PORT || 3000
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/quiz", quizRouter);
+app.use("/api/v1/quiz/attempted", attemptedQuizzesRouter);
 
 app.get("/",(req,res)=>{
     console.log("Hii Home page");

@@ -43,7 +43,7 @@
         "status": "incorrect"
       }
     ],
-    "score": 30
+    "score": 50
   },
   {
     "_id": { "$oid": "652ccccc3333333333333333" },
@@ -61,6 +61,6 @@
         "status": "incorrect"
       }
     ],
-    "score": 40
+    "score": 140
   }
 ]

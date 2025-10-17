@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/Card";
 import { Button } from "../components/ui/button";
 import { Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Dialog,
   DialogClose,
@@ -20,14 +20,25 @@ import axios from "axios";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [quizzes,setQuizzes] = useState();
+  const params = useParams();
+  const userId=params.userId;
+  const [quizzes,setQuizzes] = useState(0);
+  const [averageScore,setAverageScore] = useState(0);
   useEffect( ()=>{
     async function fetchData(){
-      const response =  await axios.get('http://localhost:8080/');
-      setQuizzes
+      const response =  await axios.get(`http://localhost:8080/api/v1/user/${userId}`);
+      setQuizzes(response.data.user.attemptedQuizzes.length);
+      let scoreSum=0;
+      response.data.user.attemptedQuizzes.map(async (quizId,ind)=>{
+        console.log("quiz Id is ",quizId);
+        // const quizResponse = await axios.get(`http://localhost:8080/api/v1/quiz/attempted/${quizId}`);
+        // console.log("score is ",quizId.score);
+        scoreSum+=quizId.score;
+      })
+      setAverageScore(scoreSum/response.data.user.attemptedQuizzes.length);
     }
     fetchData();
-  })
+  },[]);
   return (
     <div className="min-h-screen bg-gray-900 text-white p-10">
       <div className="mb-4 flex justify-between">
@@ -66,11 +77,11 @@ export default function Dashboard() {
       <div className="flex justify-between gap-8">
         <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Total Quizzes</h1>
-          <h1 className="text-5xl font-semibold">2333</h1>
+          <h1 className="text-5xl font-semibold">{quizzes}</h1>
         </Card>
         <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Average Score</h1>
-          <h1 className="text-5xl font-semibold">2333</h1>
+          <h1 className="text-5xl font-semibold">{averageScore}</h1>
         </Card>
         <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Accuracy</h1>

@@ -107,7 +107,7 @@ export async function logout(req,res){
 
 export async function getUserDashboard(req,res){
     try{
-        const userId=req.params;
+        const userId=req.params.userId;
         
         const user = await User.findById(userId)
         .select("-password")
