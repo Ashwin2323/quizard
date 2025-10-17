@@ -1,10 +1,11 @@
 import { Brain, ChartNoAxesColumn, LayoutDashboard, List, Settings, SquareLibrary, X } from "lucide-react";
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 export default function AppSidebar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+ const params = useParams();
+ const userId = params.userId;
   return (
     <div className="flex">
       {/* Mobile Menu Button */}
@@ -21,17 +22,17 @@ export default function AppSidebar() {
           <div className="fixed inset-0 bg-black opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
           <div className="fixed inset-y-0 left-0 w-60 bg-white dark:bg-gray-800 p-5 pt-14 transform transition-transform duration-300 ease-in-out">
             <div className="space-y-4 pt-12">
-              <Link to="dashboard" className="flex items-center gap-2">
-                <ChartNoAxesColumn size={22} />
+              <Link to={`/user/${userId}`} className="flex items-center gap-2">
+                <LayoutDashboard size={22} />
                 <h1>Dashboard</h1>
               </Link>
-              <Link to="course" className="flex items-center gap-2">
-                <SquareLibrary size={22} />
-                <h1>Courses</h1>
+              <Link to="quizzes" className="flex items-center gap-2">
+                <Brain size={22} />
+                <h1>Quizzes</h1>
               </Link>
-              <Link to="course" className="flex items-center gap-2">
+              <Link to="settings" className="flex items-center gap-2">
                 <Settings size={22} />
-                <h1>Courses</h1>
+                <h1>Settings</h1>
               </Link>
             </div>
           </div>
@@ -41,7 +42,7 @@ export default function AppSidebar() {
       {/* Desktop Sidebar */}
       <div className="hidden bg-gray-950 text-white lg:block w-[250px] sm:w-[250px] space-y-8 border-r border-gray-800 dark:border-gray-700 p-12 px-5 sticky top-0 h-screen">
         <div className="space-y-4">
-          <Link to="/user" className="flex items-center gap-2">
+          <Link to={`/user/${userId}`} className="flex items-center gap-2">
             <LayoutDashboard size={22} />
             <h1>Dashboard</h1>
           </Link>
