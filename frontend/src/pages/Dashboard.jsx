@@ -15,12 +15,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import CreateQuiz from "./CreateQuiz";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  function createNewQuizHandler() {}
+  const [quizzes,setQuizzes] = useState();
+  useEffect( ()=>{
+    async function fetchData(){
+      const response =  await axios.get('http://localhost:8080/');
+      setQuizzes
+    }
+    fetchData();
+  })
   return (
-    <div className="min-h-screen bg-gray-800 text-white p-10">
+    <div className="min-h-screen bg-gray-900 text-white p-10">
       <div className="mb-4 flex justify-between">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
@@ -43,7 +52,6 @@ export default function Dashboard() {
                   </DialogDescription>
                 </DialogHeader>
                 <CreateQuiz />
-
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button variant="outline" className='text-black'>Cancel</Button>
@@ -56,15 +64,15 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex justify-between gap-8">
-        <Card className="bg-blue-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Total Quizzes</h1>
           <h1 className="text-5xl font-semibold">2333</h1>
         </Card>
-        <Card className="bg-blue-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Average Score</h1>
           <h1 className="text-5xl font-semibold">2333</h1>
         </Card>
-        <Card className="bg-blue-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-700 text-white border-none p-5 w-full">
           <h1 className="text-xl">Accuracy</h1>
           <h1 className="text-5xl font-semibold">80%</h1>
         </Card>

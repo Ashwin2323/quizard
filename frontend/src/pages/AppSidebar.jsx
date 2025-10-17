@@ -39,7 +39,7 @@ export default function AppSidebar() {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block w-[250px] sm:w-[250px] space-y-8 border-r border-gray-300 dark:border-gray-700 p-6 sticky top-0 h-screen">
+      <div className="hidden bg-gray-950 text-white lg:block w-[250px] sm:w-[250px] space-y-8 border-r border-gray-800 dark:border-gray-700 p-12 px-5 sticky top-0 h-screen">
         <div className="space-y-4">
           <Link to="/user" className="flex items-center gap-2">
             <LayoutDashboard size={22} />

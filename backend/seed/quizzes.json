@@ -4,7 +4,7 @@
     "title": "JavaScript Basics",
     "description": "Test JS basics",
     "isAttempted": true,
-    "quizLevel": "easy",
+    "quizLevel": "Easy",
     "questions": [
       { "$oid": "652caaaa1111111111111111" },
       { "$oid": "652caaaa4444444444444444" },
@@ -16,8 +16,8 @@
     "_id": { "$oid": "652cbbbb2222222222222222" },
     "title": "Data Structures",
     "description": "Basics of data structures",
-    "isAttempted": false,
-    "quizLevel": "medium",
+    "isAttempted": true,
+    "quizLevel": "Medium",
     "questions": [
       { "$oid": "652caaaa6666666666666666" },
       { "$oid": "652caaaa7777777777777777" },
@@ -30,7 +30,7 @@
     "title": "System Design",
     "description": "Advanced system design",
     "isAttempted": true,
-    "quizLevel": "hard",
+    "quizLevel": "Hard",
     "questions": [
       { "$oid": "652caaaa5555555555555555" },
       { "$oid": "652caaaabbbbbbbbbbbbbbbb" }

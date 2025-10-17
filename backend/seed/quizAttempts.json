@@ -20,7 +20,7 @@
         "status": "incorrect"
       }
     ],
-    "score": 2
+    "score": 20
   },
   {
     "_id": { "$oid": "652ccccc2222222222222222" },
@@ -43,6 +43,24 @@
         "status": "incorrect"
       }
     ],
-    "score": 2
+    "score": 30
+  },
+  {
+    "_id": { "$oid": "652ccccc3333333333333333" },
+    "user": { "$oid": "652c11111111111111111111" },
+    "quiz": { "$oid": "652cbbbb3333333333333333" },
+    "answers": [
+      {
+        "questionId": { "$oid": "652caaaa5555555555555555" },
+        "chosenOption": "B",
+        "status": "correct"
+      },
+      {
+        "questionId": { "$oid": "652caaaabbbbbbbbbbbbbbbb" },
+        "chosenOption": "A",
+        "status": "incorrect"
+      }
+    ],
+    "score": 40
   }
 ]

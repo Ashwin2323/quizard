@@ -32,7 +32,7 @@ export default function App() {
               element: <QuizPage/>,
             },
             {
-              path: 'user',
+              path: 'user/:userId',
               element:<AppSidebar/>,
               children: [
                 {

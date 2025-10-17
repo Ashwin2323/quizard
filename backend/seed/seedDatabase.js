@@ -19,7 +19,13 @@ async function seedDB() {
     await Quiz.deleteMany();
     await QuizAttempt.deleteMany();
 
-    users.forEach(user=> user._id=new mongoose.Types.ObjectId(user._id.$oid));
+    users.forEach(user => {
+      user._id = new mongoose.Types.ObjectId(user._id.$oid);
+      if (user.attemptedQuizzes) {
+        user.attemptedQuizzes = user.attemptedQuizzes.map(q => new mongoose.Types.ObjectId(q.$oid || q));
+      }
+    });
+
     questions.forEach(question=> question._id=new mongoose.Types.ObjectId(question._id.$oid));
     const insertedUsers = await User.insertMany(users);
     const insertedQuestions = await Question.insertMany(questions);
