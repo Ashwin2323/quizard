@@ -13,14 +13,14 @@ export default function AppSidebar() {
         className="lg:hidden fixed top-13 left-1 z-50 p-2"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
-        {isMobileMenuOpen ? <X size={24} /> : <List  size={24} />}
+        {isMobileMenuOpen ? <X className="text-white" size={24} /> : <List className="text-white"  size={24} />}
       </button>
 
       {/* Mobile Sidebar */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40">
           <div className="fixed inset-0 bg-black opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
-          <div className="fixed inset-y-0 left-0 w-60 bg-white dark:bg-gray-800 p-5 pt-14 transform transition-transform duration-300 ease-in-out">
+          <div className=" fixed inset-y-0 left-0 w-60 bg-gray-900 text-white dark:bg-gray-800 p-5 pt-14 transform transition-transform duration-300 ease-in-out">
             <div className="space-y-4 pt-12">
               <Link to={`/user/${userId}`} className="flex items-center gap-2">
                 <LayoutDashboard size={22} />

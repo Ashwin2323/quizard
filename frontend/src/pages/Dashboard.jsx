@@ -30,9 +30,7 @@ export default function Dashboard() {
       setQuizzes(response.data.user.attemptedQuizzes.length);
       let scoreSum=0;
       response.data.user.attemptedQuizzes.map(async (quizId,ind)=>{
-        console.log("quiz Id is ",quizId);
-        // const quizResponse = await axios.get(`http://localhost:8080/api/v1/quiz/attempted/${quizId}`);
-        // console.log("score is ",quizId.score);
+        // console.log("quiz Id is ",quizId);
         scoreSum+=quizId.score;
       })
       setAverageScore(scoreSum/response.data.user.attemptedQuizzes.length);
