@@ -48,7 +48,7 @@ export default function Dashboard() {
           <Dialog>
             <form>
               <DialogTrigger asChild>
-                <Button className="bg-green-500 text-base">
+                <Button className="bg-green-700 text-base">
                   <Plus size={23} />
                   Create New Quiz
                 </Button>
