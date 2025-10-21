@@ -3,23 +3,26 @@ import { User } from "../models/userModel.js";
 
 export async function getQuizDetails(req,res){
     try{
-        const quizId = req.params.quizId;
+        const userId = req.params.userId;
         
-        const quiz = await QuizAttempt.findById(quizId);
+        const quizzes = await QuizAttempt.find({userId}).populate("quizId");
 
-        if(!quiz){
-            return res.send("quiz not found");
+        if(!quizzes){
+            return res.status(404).json({
+                success: false,
+                message: "No quiz attempts found for this user.",
+            });
         }
         
         return res.status(200).json({
             success: true,
-            quiz,
+            quizzes,
         });
     }catch(e){
         console.log(e);
         return res.status(500).json({
           success: false,
-          message: "Failed to load quiz",
+          message: "Failed to load quizzes",
         });
     }
 }

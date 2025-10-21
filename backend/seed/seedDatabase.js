@@ -40,8 +40,8 @@ async function seedDB() {
     
     quizAttempts.forEach((attempt)=>{
       attempt._id=new mongoose.Types.ObjectId(attempt._id.$oid);
-      attempt.user=new mongoose.Types.ObjectId(attempt.user.$oid)
-      attempt.quiz=new mongoose.Types.ObjectId(attempt.quiz.$oid)
+      attempt.userId=new mongoose.Types.ObjectId(attempt.userId.$oid)
+      attempt.quizId=new mongoose.Types.ObjectId(attempt.quizId.$oid)
       attempt.answers=attempt.answers.map(ans => ({
         questionId: new mongoose.Types.ObjectId(ans.questionId.$oid || ans.questionId),
         chosenOption: ans.chosenOption,

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const quizAttemptSchema = new mongoose.Schema({
-    user: { type: mongoose.Types.ObjectId, ref: "User", required: true },
-    quiz: { type: mongoose.Types.ObjectId, ref: "Quiz", required: true },
+    userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+    quizId: { type: mongoose.Types.ObjectId, ref: "Quiz", required: true },
     answers: [{
         questionId: { type: mongoose.Types.ObjectId, ref: "Question" },
         chosenOption: { type: String, enum: ["A", "B", "C", "D", ""] },
