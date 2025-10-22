@@ -28,6 +28,10 @@ export default function App() {
               element: <Login/>,
             },
             {
+              path: "signup",
+              element: <Login/>,
+            },
+            {
               path: "quiz",
               element: <QuizPage/>,
             },

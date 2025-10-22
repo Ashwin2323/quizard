@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { useEffect } from "react";
 import { useNavigate} from "react-router-dom"
 import {Link} from 'react-router-dom'
 const Navbar = () => {
@@ -21,7 +22,7 @@ const Navbar = () => {
         <Button className="h-full bg-slate-200 text-gray-600" 
         onClick={()=>{navigate("/login")}} >Sign In</Button>
         <Button className="h-full bg-violet-800"
-        onClick={()=>{navigate("/signup")}} >Register</Button>
+        onClick={()=>{navigate("/login")}} >Register</Button>
         <Button className="h-full bg-green-800"
         onClick={()=>{navigate("/user")}} >Dashboard</Button>
       </div>

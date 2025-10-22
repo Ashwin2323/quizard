@@ -16,6 +16,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@/components/ui/toast"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [signupInput, setSignupInput] = useState({
@@ -27,6 +28,7 @@ export default function Login() {
     email:"", 
     password:"",
   });
+  const navigate=useNavigate();
   const { toast } = useToast();
   
   async function signupHandler(){
@@ -39,6 +41,8 @@ export default function Login() {
         toast({
             title: response.data.message || "Signup Successful",
         });
+        // console.log(response.data);
+        navigate(`/user/${response.data.userId}`);
       } catch (err) {
         toast({
           variant: "destructive",
@@ -58,6 +62,8 @@ export default function Login() {
         toast({
             title: response.data.message || "Login Successful",
         });
+        // console.log(response.data);
+        navigate(`/user/${response.data.userId}`);
       } catch (err) {
         toast({
           variant: "destructive",
@@ -68,86 +74,87 @@ export default function Login() {
   }
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-6">
-      <Tabs defaultValue="account">
-        <TabsList>
-          <TabsTrigger value="account">Signup</TabsTrigger>
-          <TabsTrigger value="password">Login</TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">
-          <Card>
-            <CardHeader>
-              <CardTitle>Signup</CardTitle>
-              <CardDescription>Create your account.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-name">Name</Label>
-                <Input 
-                  id="tabs-demo-name" 
-                  placeholder="John" 
-                  onChange={e => setSignupInput({...signupInput, name: e.target.value})}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-email">Email</Label>
-                <Input
-                  id="tabs-demo-email"
-                  type="email"
-                  placeholder="john@mail.com"
-                  onChange={e => setSignupInput({...signupInput, email: e.target.value})}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-password">Password</Label>
-                <Input
-                  id="tabs-demo-password"
-                  type="password"
-                  placeholder="123456"
-                  onChange={e => setSignupInput({...signupInput, password: e.target.value})}
-                />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button onClick={signupHandler}>Sign up</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="password">
-          <Card>
-            <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-                Change your password here. After saving, you&apos;ll be logged
-                out.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-current">Email</Label>
-                <Input
-                  id="tabs-demo-current"
-                  type="email"
-                  placeholder="john@mail.com"
-                  onChange={e => setLoginInput({...loginInput, email: e.target.value})}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="tabs-demo-new">Password</Label>
-                <Input
-                  id="tabs-demo-new"
-                  type="password"
-                  placeholder="123456"
-                  onChange={e => setLoginInput({...loginInput, password: e.target.value})}
-                />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button onClick={loginHandler}>Login</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      </Tabs>
+    <div className="flex justify-center min-h-screen  bg-gray-900">
+      <div className="w-full max-w-sm mt-20">
+        <Tabs defaultValue="account">
+          <TabsList>
+            <TabsTrigger value="account">Signup</TabsTrigger>
+            <TabsTrigger value="password">Login</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            <Card>
+              <CardHeader>
+                <CardTitle>Signup</CardTitle>
+                <CardDescription>Create your account.</CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-6">
+                <div className="grid gap-3">
+                  <Label htmlFor="tabs-demo-name">Name</Label>
+                  <Input 
+                    id="tabs-demo-name" 
+                    placeholder="John" 
+                    onChange={e => setSignupInput({...signupInput, name: e.target.value})}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="tabs-demo-email">Email</Label>
+                  <Input
+                    id="tabs-demo-email"
+                    type="email"
+                    placeholder="john@mail.com"
+                    onChange={e => setSignupInput({...signupInput, email: e.target.value})}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="tabs-demo-password">Password</Label>
+                  <Input
+                    id="tabs-demo-password"
+                    type="password"
+                    placeholder="123456"
+                    onChange={e => setSignupInput({...signupInput, password: e.target.value})}
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button onClick={signupHandler}>Sign up</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+          <TabsContent value="password">
+            <Card>
+              <CardHeader>
+                <CardTitle>Login</CardTitle>
+                <CardDescription>
+                  Enter you credentials for login
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-6">
+                <div className="grid gap-3">
+                  <Label htmlFor="tabs-demo-current">Email</Label>
+                  <Input
+                    id="tabs-demo-current"
+                    type="email"
+                    placeholder="john@mail.com"
+                    onChange={e => setLoginInput({...loginInput, email: e.target.value})}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <Label htmlFor="tabs-demo-new">Password</Label>
+                  <Input
+                    id="tabs-demo-new"
+                    type="password"
+                    placeholder="123456"
+                    onChange={e => setLoginInput({...loginInput, password: e.target.value})}
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button onClick={loginHandler}>Login</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }

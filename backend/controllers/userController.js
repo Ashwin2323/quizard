@@ -30,6 +30,7 @@ export async function signup(req,res){
     
         // console.log("Hii from register");
         return res.json({
+            userId: newUser._id,
             message: `Welcome , ${user.name}!`,
             success: true
         });
@@ -72,6 +73,7 @@ export async function login(req,res){
           sameSite: "None",
         });
         return res.json({
+          userId: alreadyExist._id,
           message: `Welcome back, ${alreadyExist.name}!`,
           success: true,
         });

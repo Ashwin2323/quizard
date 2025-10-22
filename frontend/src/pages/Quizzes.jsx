@@ -30,12 +30,14 @@ export default function Quizzes() {
 const params = useParams();
 const userId = params.userId;
 const [quizzes,setQuizzes]=useState([]);
+const [loading, setLoading]=useState(true);
 useEffect(()=>{
   const fetchData = async()=>{
     try{
       const response = await axios.get(`http://localhost:8080/api/v1/quiz/attempted/${userId}`);
-      console.log("response data for quizzes ", response.data);
+      // console.log("response data for quizzes ", response.data);
       setQuizzes(response.data.quizzes);
+      setLoading(false);
     }catch(e){
       console.log(e);
     }
@@ -51,7 +53,7 @@ useEffect(()=>{
           <h3 className="text-xl">Browse and Manage all your quizzes</h3>
         </div>
       </div>
-      <Card className="grid gap-4 bg-slate-800 p-5 border-gray-600">
+      <Card className=" min-h-full grid gap-8 bg-slate-800 p-5 border-gray-600">
         <div className="flex justify-between">
           <ButtonGroup className={"text-white"}>
             <Button className={"bg-gray-800 border-gray-500"} variant="outline">
@@ -111,9 +113,9 @@ useEffect(()=>{
           </div>
         </div>
         <div className=" grid gap-4">
-          {quizzes.length ? quizzes.map((quiz,ind)=>(
-            <Card key={ind} className="bg-gray-900 border-gray-500 text-gray-200 min-w-full">
-              <div className="flex min-h-full justify-between p-3 items-center">
+          {!loading && quizzes.length ? quizzes.map((quiz,ind)=>(
+            <Card key={ind} className="bg-gray-900 border-gray-500 text-gray-200 min-w-full max-h-fit">
+              <div className="flex justify-between p-3 items-center">
                 <div className="flex gap-4 items-center">
                   <div>
                     <div className="flex justify-center items-center w-8 h-8 rounded-full border border-gray-500 bg-gray-800">
@@ -154,7 +156,11 @@ useEffect(()=>{
                 </div>
               </div>
             </Card>
-          )):<div className="text-white flex justify-center text-2xl
+          )):loading ? <div className="text-white flex justify-center text-2xl
+          py-2 font-semibold">
+            Loading...
+            </div>
+           :<div className="text-white flex justify-center text-2xl
           py-2 font-semibold">
             no attempted quiz
             </div>

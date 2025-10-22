@@ -24,6 +24,7 @@ export default function Dashboard() {
   const userId=params.userId;
   const [quizzes,setQuizzes] = useState(0);
   const [averageScore,setAverageScore] = useState(0);
+  const [loading,setLoading]=useState(true);
   useEffect( ()=>{
     async function fetchData(){
       const response =  await axios.get(`http://localhost:8080/api/v1/user/${userId}`);
@@ -34,6 +35,7 @@ export default function Dashboard() {
         scoreSum+=quizId.score;
       })
       setAverageScore(scoreSum/response.data.user.attemptedQuizzes.length);
+      setLoading(false);
     }
     fetchData();
   },[]);
@@ -73,17 +75,26 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex justify-between gap-8">
-        <Card className="bg-gray-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-800 text-white border-none p-5 w-full">
           <h1 className="text-xl">Total Quizzes</h1>
-          <h1 className="text-5xl font-semibold">{quizzes}</h1>
+          {loading ?<div className="text-white">
+              Loading...
+          </div>:
+          <h1 className="text-5xl font-semibold">{quizzes}</h1>}
         </Card>
-        <Card className="bg-gray-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-800 text-white border-none p-5 w-full">
           <h1 className="text-xl">Average Score</h1>
-          <h1 className="text-5xl font-semibold">{averageScore}</h1>
+          {loading ?<div className="text-white">
+              Loading...
+          </div>:
+          <h1 className="text-5xl font-semibold">{averageScore}</h1>}
         </Card>
-        <Card className="bg-gray-700 text-white border-none p-5 w-full">
+        <Card className="bg-gray-800 text-white border-none p-5 w-full">
           <h1 className="text-xl">Accuracy</h1>
-          <h1 className="text-5xl font-semibold">80%</h1>
+          {loading ?<div className="text-white">
+              Loading...
+          </div>:
+          <h1 className="text-5xl font-semibold">80%</h1>}
         </Card>
       </div>
     </div>
