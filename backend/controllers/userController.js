@@ -84,26 +84,25 @@ export async function login(req,res){
 }
 
 export async function logout(req,res){
-    try{
-        const user=req.body;
-        if(!user){
-            return res.send("Invalid Input");
-        }
-        if(!user.email || !user.password){
-            return res.send("Invalid Input");
-        }
-        
-        const alreadyExist = await User.findOne({email: user.email});
-        if(!alreadyExist){
-            return res.send("Invalid Credentials");
-        }
-        res.clearCookie('token');
-        return res.cookie('token',"").json({
-            message: `Logged out successfully`,
+    try {
+      res.status(200).cookie(
+        "token",
+        "",
+        { 
+            maxAge: 0, 
+            httpOnly: true,
+            sameSite: "None", 
+            secure: process.env.NODE_ENV === "production" ? true : false
+        }).json({
+          message: "Logged out successfully.",
+          success: true,
         });
-    }catch (error) {
+    } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: "Failed to Logout" });
+      return res.status(500).json({
+        success: false,
+        message: "Failed to logout",
+      });
     }
 }
 

@@ -12,13 +12,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {useSelector} from "react-redux"
+import { userLogin, userLogout } from "../store/authSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+  const { toast } = useToast();
   const [signupInput, setSignupInput] = useState({
     name:"",
     email:"",
@@ -28,8 +34,7 @@ export default function Login() {
     email:"", 
     password:"",
   });
-  const navigate=useNavigate();
-  const { toast } = useToast();
+  const isAuthenticated = useSelector(store=>store.authSlice.isAuthenticated);
   
   async function signupHandler(){
     try {
@@ -42,6 +47,7 @@ export default function Login() {
             title: response.data.message || "Signup Successful",
         });
         // console.log(response.data);
+        dispatch(userLogin());
         navigate(`/user/${response.data.userId}`);
       } catch (err) {
         toast({
@@ -62,7 +68,7 @@ export default function Login() {
         toast({
             title: response.data.message || "Login Successful",
         });
-        // console.log(response.data);
+        dispatch(userLogin());
         navigate(`/user/${response.data.userId}`);
       } catch (err) {
         toast({
