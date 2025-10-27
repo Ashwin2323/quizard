@@ -12,7 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {toast} = useToast();
-  const isAuthenticated = useSelector(store=>store.authSlice.isAuthenticated);
+  const {isAuthenticated,userId} = useSelector(store=>store.authSlice);
   async function logoutHandler(){
     try{
       const response = await axios.get(
@@ -50,10 +50,10 @@ const Navbar = () => {
          <> <Button className="h-full bg-slate-200 text-gray-600" 
             onClick={()=>{navigate("/login")}} >Sign In</Button>
             <Button className="h-full bg-violet-800"
-            onClick={()=>{navigate("/login")}} >Register</Button></>
+            onClick={()=>{navigate("/signup")}} >Register</Button></>
           ) :(
           <><Button className="h-full bg-green-800"
-            onClick={()=>{navigate("/user")}} >Dashboard</Button>
+            onClick={()=>{navigate(`/user/${userId}`)}} >Dashboard</Button>
             <Button className="h-full bg-red-700"
             onClick={logoutHandler} >Log Out</Button></>
           )}

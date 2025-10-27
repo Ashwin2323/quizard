@@ -1,4 +1,4 @@
-import { AppWindowIcon, CodeIcon } from "lucide-react";
+import { AppWindowIcon, CodeIcon, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast"
 import { ToastAction } from "@/components/ui/toast"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux"
 import { userLogin, userLogout } from "../store/authSlice";
@@ -24,7 +24,10 @@ import { userLogin, userLogout } from "../store/authSlice";
 export default function Login() {
   const dispatch = useDispatch();
   const navigate=useNavigate();
+  const params = useParams();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("login");
   const [signupInput, setSignupInput] = useState({
     name:"",
     email:"",
@@ -35,21 +38,37 @@ export default function Login() {
     password:"",
   });
   const isAuthenticated = useSelector(store=>store.authSlice.isAuthenticated);
+
+  useEffect(() => {
+  if (window.location.pathname === "/signup") {
+      setActiveTab("signup");
+    }
+  }, []);
+  
+  function handleKeyPress(e) {
+    if (e.key === "Enter") {
+      if (activeTab === "signup") signupHandler();
+      if (activeTab === "login") loginHandler();
+    }
+  }
   
   async function signupHandler(){
+    setLoading(true);
     try {
         const response = await axios.post(
           'http://localhost:8080/api/v1/user/signup',
           signupInput,
           { headers: { 'Content-Type': 'application/json' } }
         );
+        setLoading(false);
         toast({
             title: response.data.message || "Signup Successful",
         });
         // console.log(response.data);
-        dispatch(userLogin());
+        dispatch(userLogin(response.data.userId));
         navigate(`/user/${response.data.userId}`);
       } catch (err) {
+        setLoading(false);
         toast({
           variant: "destructive",
           title: err.response?.data?.message || "Server error"
@@ -59,18 +78,21 @@ export default function Login() {
   }
   
   async function loginHandler(){
+      setLoading(true);
       try {
         const response = await axios.post(
           'http://localhost:8080/api/v1/user/login',
           loginInput,
           { headers: { 'Content-Type': 'application/json' }, withCredentials: true,}
         );
+        setLoading(false);
         toast({
-            title: response.data.message || "Login Successful",
+          title: response.data.message || "Login Successful",
         });
-        dispatch(userLogin());
+        dispatch(userLogin(response.data.userId));
         navigate(`/user/${response.data.userId}`);
       } catch (err) {
+        setLoading(false);
         toast({
           variant: "destructive",
           title: err.response?.data?.message || "Server error"
@@ -82,12 +104,12 @@ export default function Login() {
   return (
     <div className="flex justify-center min-h-screen  bg-gray-900">
       <div className="w-full max-w-sm mt-20">
-        <Tabs defaultValue="account">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
-            <TabsTrigger value="account">Signup</TabsTrigger>
-            <TabsTrigger value="password">Login</TabsTrigger>
+            <TabsTrigger value="signup">Signup</TabsTrigger>
+            <TabsTrigger value="login">Login</TabsTrigger>
           </TabsList>
-          <TabsContent value="account">
+          <TabsContent value="signup">
             <Card>
               <CardHeader>
                 <CardTitle>Signup</CardTitle>
@@ -100,6 +122,7 @@ export default function Login() {
                     id="tabs-demo-name" 
                     placeholder="John" 
                     onChange={e => setSignupInput({...signupInput, name: e.target.value})}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
                 <div className="grid gap-3">
@@ -109,6 +132,7 @@ export default function Login() {
                     type="email"
                     placeholder="john@mail.com"
                     onChange={e => setSignupInput({...signupInput, email: e.target.value})}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
                 <div className="grid gap-3">
@@ -118,15 +142,18 @@ export default function Login() {
                     type="password"
                     placeholder="123456"
                     onChange={e => setSignupInput({...signupInput, password: e.target.value})}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={signupHandler}>Sign up</Button>
+                <Button onClick={signupHandler} disabled={loading}>
+                  {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Sign Up"}
+                </Button>
               </CardFooter>
             </Card>
           </TabsContent>
-          <TabsContent value="password">
+          <TabsContent value="login">
             <Card>
               <CardHeader>
                 <CardTitle>Login</CardTitle>
@@ -142,6 +169,7 @@ export default function Login() {
                     type="email"
                     placeholder="john@mail.com"
                     onChange={e => setLoginInput({...loginInput, email: e.target.value})}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
                 <div className="grid gap-3">
@@ -151,11 +179,14 @@ export default function Login() {
                     type="password"
                     placeholder="123456"
                     onChange={e => setLoginInput({...loginInput, password: e.target.value})}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
               </CardContent>
               <CardFooter>
-                <Button onClick={loginHandler}>Login</Button>
+                <Button onClick={loginHandler} disabled={loading}>
+                  {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Login"}
+                </Button>
               </CardFooter>
             </Card>
           </TabsContent>

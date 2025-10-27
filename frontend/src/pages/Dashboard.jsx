@@ -24,27 +24,35 @@ export default function Dashboard() {
   const userId=params.userId;
   const [quizzes,setQuizzes] = useState(0);
   const [averageScore,setAverageScore] = useState(0);
+  const [name,setName] = useState("User");
   const [loading,setLoading]=useState(true);
   useEffect( ()=>{
-    async function fetchData(){
-      const response =  await axios.get(`http://localhost:8080/api/v1/user/${userId}`);
-      setQuizzes(response.data.user.attemptedQuizzes.length);
-      let scoreSum=0;
-      response.data.user.attemptedQuizzes.map(async (quizId,ind)=>{
-        // console.log("quiz Id is ",quizId);
-        scoreSum+=quizId.score;
-      })
-      setAverageScore(scoreSum/response.data.user.attemptedQuizzes.length);
-      setLoading(false);
+    try{
+      async function fetchData(){
+        const response =  await axios.get(`http://localhost:8080/api/v1/user/${userId}`, 
+          {withCredentials:true}
+        );
+        setQuizzes(response.data.user.attemptedQuizzes.length);
+        let scoreSum=0;
+        response.data.user.attemptedQuizzes.forEach(q => {
+          scoreSum += q.score;
+        });
+        setName(response.data.user.name);
+        const total = response.data.user.attemptedQuizzes.length;
+        setAverageScore(total > 0 ? (scoreSum / total).toFixed(2) : 0);
+        setLoading(false);
+      }
+      fetchData();
+    }catch(e){
+      console.log(e);
     }
-    fetchData();
   },[]);
   return (
     <div className="min-h-screen bg-gray-900 text-white p-10">
       <div className="mb-4 flex justify-between">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <h3 className="text-xl">Welcome back, User!</h3>
+          <h3 className="text-xl">Welcome back, {name}!</h3>
         </div>
         <div>
           <Dialog>

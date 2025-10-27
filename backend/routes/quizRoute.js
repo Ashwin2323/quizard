@@ -6,6 +6,6 @@ const router=express.Router();
 
 router.get("/:quizId",getQuizDetails);
 router.get("/quizzes",getQuizzes);
-router.get("/create",createQuiz);
+router.get("/create",isAuthenticated,createQuiz);
 
 export default router;

@@ -70,7 +70,7 @@ export async function login(req,res){
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production" ? true : false,
-          sameSite: "None",
+          sameSite: "lax",
         });
         return res.json({
           userId: alreadyExist._id,
@@ -91,7 +91,7 @@ export async function logout(req,res){
         { 
             maxAge: 0, 
             httpOnly: true,
-            sameSite: "None", 
+            sameSite: "lax", 
             secure: process.env.NODE_ENV === "production" ? true : false
         }).json({
           message: "Logged out successfully.",

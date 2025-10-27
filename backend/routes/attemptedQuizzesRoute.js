@@ -4,7 +4,7 @@ import { getQuizDetails } from "../controllers/attemptedQuizzesController.js";
 
 const router=express.Router();
 
-router.get("/:userId",getQuizDetails);
+router.get("/:userId",isAuthenticated,getQuizDetails);
 
 
 export default router;

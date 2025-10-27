@@ -12,6 +12,7 @@ import Layout from "./layout/Layout";
 import AppSidebar from "./pages/AppSidebar";
 import {SidebarProvider} from '@/components/ui/sidebar'
 import Quizzes from "./pages/Quizzes";
+import ProtectedRoutes from "./components/protectedRoutes";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -37,7 +38,7 @@ export default function App() {
             },
             {
               path: 'user/:userId',
-              element:<AppSidebar/>,
+              element:<ProtectedRoutes><AppSidebar/></ProtectedRoutes>,
               children: [
                 {
                   // path: '/',
